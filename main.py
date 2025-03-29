@@ -12,6 +12,7 @@
  
 import sys
 import pygame
+import Goals
  
 # Define some colors
 BLACK = (0, 0, 0)
