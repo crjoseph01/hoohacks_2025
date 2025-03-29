@@ -21,9 +21,6 @@ pygame.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-GOLD = (255, 215, 0, 255)
 
 # Other constants
 WIDTH, HEIGHT = 800, 600
@@ -35,7 +32,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Daily Habit Tracker!")
 
 # Font
-font = pygame.font.Font(None, 36)
+font = pygame.font.Font(None, 56)
 
 def draw_button(x, y, image_path):
     button = pygame.image.load(image_path) 
@@ -68,13 +65,11 @@ while not done:
                 game_state = "my_goals"  # Switch to goals screen
             elif game_state == "main_menu" and paintings_button.collidepoint(event.pos):
                 game_state = "my_paintings" # Switch to paintings screen
-            # elif game_state == "my_goals" and menu_button.collidepoint(event.pos):
-            #     game_state = "main_menu"  # Switch to main menu screen
     
     # **Render Screens Based on game_state**
     if game_state == "main_menu":
         screen.fill(WHITE)
-        title_text = font.render("Main Menu", True, BLUE)
+        title_text = font.render("Daily Habit Tracker!", True, BLUE)
         title_textw, title_texth = title_text.get_size()
         screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 4))
         
