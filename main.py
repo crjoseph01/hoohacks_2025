@@ -17,14 +17,24 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+
+button_color = (0, 255, 0)
+button_rect = pygame.Rect(300, 250, 200, 50)  # (x, y, width, height)
+
+habits = {"Exercise": 0, "Reading": 0, "Meditation": 0}
+habit_buttons = []
+
+# Create button positions
+for i, habit in enumerate(habits):
+    rect = pygame.Rect(300, 150 + (i * 100), 200, 50)
+    habit_buttons.append((habit, rect))
  
 pygame.init()
  
 # Set the width and height of the screen [width, height]
-size = (700, 500)
+size = (800, 600)
 screen = pygame.display.set_mode(size)
- 
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Habit Tracker Game")
  
 # Loop until the user clicks the close button.
 done = False
@@ -51,6 +61,31 @@ while not done:
     screen.fill(WHITE)
  
     # --- Drawing code should go here
+    # Draw button
+    pygame.draw.rect(screen, button_color, button_rect)
+
+    # Event handling
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if button_rect.collidepoint(event.pos):  # Check if button clicked
+                print("Habit Completed!")  # Replace with habit tracking logic
+    
+    for habit, rect in habit_buttons:
+        pygame.draw.rect(screen, (0, 255, 0), rect)
+        font = pygame.font.Font(None, 36)
+        text = font.render(f"{habit}: {habits[habit]}", True, (255, 255, 255))
+        screen.blit(text, (rect.x + 10, rect.y + 10))
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            for habit, rect in habit_buttons:
+                if rect.collidepoint(event.pos):
+                    habits[habit] += 1  # Increment habit count
+
  
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
