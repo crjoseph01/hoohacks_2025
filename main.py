@@ -81,9 +81,9 @@ while not done:
                 print("Habit Completed!")  # Replace with habit tracking logic
     
     for habit, rect in habit_buttons:
-        pygame.draw.rect(screen, (0, 255, 0), rect)
+        pygame.draw.rect(screen, GREEN, rect)
         font = pygame.font.Font(None, 36)
-        text = font.render(f"{habit}: {habits[habit]}", True, (255, 255, 255))
+        text = font.render(f"{habit}: {habits[habit]}", True, WHITE)
         screen.blit(text, (rect.x + 10, rect.y + 10))
 
     for event in pygame.event.get():
@@ -94,8 +94,14 @@ while not done:
                 if rect.collidepoint(event.pos):
                     habits[habit] += 1  # Increment habit count
     
-    reward_text = font.render(get_reward(habits["Exercise"]), True, (255, 0, 0))
+    reward_text = font.render(get_reward(habits["Exercise"]), True, RED)
     screen.blit(reward_text, (500, 500))
+
+    # Get mouse position and draw custom cursor
+    cursor_img = pygame.image.load("cursor.png")  # Load a custom cursor image
+    pygame.mouse.set_visible(False)  # Hide default cursor
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    screen.blit(cursor_img, (mouse_x, mouse_y))
 
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
