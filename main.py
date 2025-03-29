@@ -8,6 +8,7 @@
  
  Explanation video: http://youtu.be/vRB_983kUMc
 """
+# Template from: http://programarcadegames.com/python_examples/f.php?file=pygame_base_template.py
  
 import sys
 import pygame
