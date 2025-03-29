@@ -97,7 +97,6 @@ while not done:
     reward_text = font.render(get_reward(habits["Exercise"]), True, (255, 0, 0))
     screen.blit(reward_text, (500, 500))
 
-
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
