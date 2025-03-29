@@ -12,12 +12,14 @@
  
 import sys
 import pygame
+import paintings
 
 pygame.init()
  
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+BLUE = (0, 0, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 GOLD = (255, 215, 0, 255)
@@ -37,7 +39,7 @@ def draw_button(x, y, text):
     textw, texth = text_surface.get_size()
     
     button_rect = pygame.Rect(x - ((textw + 100)// 2), y, textw + 100, texth + 50)
-    pygame.draw.rect(screen, GOLD, button_rect)
+    pygame.draw.rect(screen, BLUE, button_rect)
     text_rect = text_surface.get_rect(center=button_rect.center)
     screen.blit(text_surface, text_rect)
     return button_rect
@@ -69,15 +71,15 @@ while not done:
                 game_state = "my_goals"  # Switch to goals screen
             elif game_state == "main_menu" and paintings_button.collidepoint(event.pos):
                 game_state = "my_paintings" # Switch to paintings screen
-            elif game_state == "my_paintings" and menu_button.collidepoint(event.pos):
-                game_state = "main_menu" # Switch to main menu screen
+            # elif game_state == "my_paintings" and menu_button.collidepoint(event.pos):
+            #     game_state = "main_menu" # Switch to main menu screen
             elif game_state == "my_goals" and menu_button.collidepoint(event.pos):
                 game_state = "main_menu"  # Switch to main menu screen
     
     # **Render Screens Based on game_state**
     if game_state == "main_menu":
         screen.fill(WHITE)
-        title_text = font.render("Main Menu", True, GOLD)
+        title_text = font.render("Main Menu", True, BLUE)
         title_textw, title_texth = title_text.get_size()
         screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 4))
         
@@ -85,19 +87,13 @@ while not done:
         paintings_button = draw_button ((WIDTH // 2), (HEIGHT // 2) + 100, "See My Paintings!")
     elif game_state == "my_goals":
         screen.fill(WHITE)
-        title_text = font.render("My Goals:", True, GOLD)
+        title_text = font.render("My Goals:", True, BLUE)
         title_textw, title_texth = title_text.get_size()
         screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 4))
         
         menu_button = draw_button(WIDTH // 2, HEIGHT // 2, "Back to Main Menu")
     elif game_state == "my_paintings":
-        screen.fill(WHITE)
-        title_text = font.render("My Paintings:", True, GOLD)
-        title_textw, title_texth = title_text.get_size()
-        screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 4))
-        
-        menu_button = draw_button(WIDTH // 2, HEIGHT // 2, "Back to Main Menu")
-        
+        game_state = paintings.paintings_page(game_state)
 
     # --- Game logic should go here
  
