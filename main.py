@@ -42,6 +42,13 @@ done = False
  
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
+
+def get_reward(points):
+    if points >= 10:
+        return "Gold Medal"
+    elif points >= 5:
+        return "Silver Medal"
+    return "Bronze Medal"
  
 # -------- Main Program Loop -----------
 while not done:
@@ -86,8 +93,11 @@ while not done:
             for habit, rect in habit_buttons:
                 if rect.collidepoint(event.pos):
                     habits[habit] += 1  # Increment habit count
+    
+    reward_text = font.render(get_reward(habits["Exercise"]), True, (255, 0, 0))
+    screen.blit(reward_text, (500, 500))
 
- 
+
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
