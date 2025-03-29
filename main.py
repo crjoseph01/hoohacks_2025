@@ -29,7 +29,7 @@ WIDTH, HEIGHT = 800, 600
  
 # Set the width and height of the screen [width, height]
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Dailt Habit Tracker!")
+pygame.display.set_caption("Daily Habit Tracker!")
 
 # Font
 font = pygame.font.Font(None, 36)
