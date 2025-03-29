@@ -57,10 +57,6 @@ clock = pygame.time.Clock()
  
 # -------- Main Program Loop -----------
 while not done:
-    # Here, we clear the screen to white. Don't put other drawing commands
-    # above this, or they will be erased with this command.
-    # If you want a background image, replace this clear with blit'ing the
-    # background image.
     screen.fill(WHITE)
 
     # --- Main event loop
@@ -89,17 +85,11 @@ while not done:
         
         # menu_button = draw_button(WIDTH // 2, HEIGHT // 2, "Back to Main Menu")
     elif game_state == "my_paintings":
-        game_state = paintings.paintings_page(game_state)
-
-    # --- Game logic should go here
- 
-    # --- Screen-clearing code goes here
- 
-    # --- Drawing code should go here
+        game_state = paintings.paintings_page(game_state, screen)
 
     # Get mouse position and draw custom cursor
     cursor_img = pygame.image.load("cursor.png")  # Load a custom cursor image
-    pygame.mouse.set_visible(False)  # Hide default cursor
+    # pygame.mouse.set_visible(False)  # Hide default cursor
     mouse_x, mouse_y = pygame.mouse.get_pos()
     screen.blit(cursor_img, (mouse_x, mouse_y))
 
