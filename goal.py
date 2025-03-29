@@ -1,4 +1,3 @@
-# goal.py
 import pygame
 import sys
 
@@ -43,7 +42,7 @@ def draw_checkbox(surface, x, y, checked):
         pygame.draw.line(surface, GREEN, (x + 20, y), (x, y + 20), 3)
     return rect
 
-def get_user_input(screen, input_rect, hide_rects):
+def get_user_input(screen, input_rect):
     user_text = ''
     active = True
     color = CADETBLUE
@@ -63,9 +62,7 @@ def get_user_input(screen, input_rect, hide_rects):
                 else:
                     user_text += event.unicode
 
-        for rect in hide_rects:
-            pygame.draw.rect(screen, WHITE, rect)
-
+        screen.fill(WHITE)  # Clear the screen before drawing
         pygame.draw.rect(screen, color, input_rect)
         text_surface = base_font.render(user_text, True, BLACK)
         screen.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
@@ -119,14 +116,7 @@ def health_goals_scene(screen, health_goals, token):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if add_button.collidepoint(event.pos):
                     input_rect = pygame.Rect(screen.get_width() // 2 - 150, screen.get_height() // 2 - 25, 300, 50)
-                    hide_rects = []
-                    #correct hide rect calculation.
-                    for k, rect in enumerate(category_rects):
-                        if k != i:
-                            hide_rects.append(pygame.Rect(rect.x - 10, 0, column_width, input_rect.y - 10)) #changed height.
-                            hide_rects.append(pygame.Rect(rect.x - 10, input_rect.bottom + 10, column_width, screen.get_height()))
-
-                    new_goal = get_user_input(screen, input_rect, hide_rects)
+                    new_goal = get_user_input(screen, input_rect)
                     if new_goal:
                         health_goals[category].append({"text": new_goal, "completed": False})
                         needs_refresh = True
