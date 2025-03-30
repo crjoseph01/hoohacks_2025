@@ -90,6 +90,7 @@ while not done:
         game_state, locked = paintings.paintings_page(game_state, screen, events, tokens, locked)
     elif game_state == "draw_page":
         tokens -= 1
+        locked = True
         game_state = draw.color_puzzle_scene(screen)
 
     # Get mouse position and draw custom cursor

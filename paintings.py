@@ -32,7 +32,7 @@ def paintings_page(game_state, screen, events, coins, locked):
         drawings_button = draw_button(WIDTH // 2, HEIGHT * 20 // 160, screen, "unlocked.png")
 
     if coins == 0:
-        text = font.render("Complete Goals to Earn Coins!", True, BLUE)
+        text = font.render("Complete Goals to Earn Tokens!", True, BLUE)
         textw, texth = text.get_size()
         screen.blit(text, ((WIDTH // 2) - (textw // 2), HEIGHT * 10 // 16))
     elif coins != 0:
