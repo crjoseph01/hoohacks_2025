@@ -32,15 +32,6 @@ def draw_button(surface, color, x, y, width, height, text):
     draw_text(text, small_font, BLACK, surface, x + 10, y + 5)
     return rect
 
-def draw_image(x, y, screen, image_path):
-    image = pygame.image.load(image_path) 
-    imagex, imagey = image.get_size()
-    button_rect = image.get_rect()
-    button_rect.topleft = (x - (imagex // 2), y)
-
-    screen.blit(image, button_rect)
-    return button_rect
-
 # Function to draw checkboxes
 def draw_checkbox(surface, x, y, checked):
     rect = pygame.Rect(x, y, 20, 20)
@@ -49,6 +40,16 @@ def draw_checkbox(surface, x, y, checked):
         pygame.draw.line(surface, GREEN, (x, y), (x + 20, y + 20), 3)
         pygame.draw.line(surface, GREEN, (x + 20, y), (x, y + 20), 3)
     return rect
+
+# Function to draw image for main menu button
+def draw_image(x, y, screen, image_path):
+    image = pygame.image.load(image_path) 
+    imagex, imagey = image.get_size()
+    button_rect = image.get_rect()
+    button_rect.topleft = (x - (imagex // 2), y)
+
+    screen.blit(image, button_rect)
+    return button_rect
 
 def get_user_input(screen, input_rect):
     user_text = ''
@@ -69,12 +70,15 @@ def get_user_input(screen, input_rect):
                     user_text = user_text[:-1]
                 else:
                     user_text += event.unicode
-
         screen.fill(WHITE)  # Clear the screen before drawing
-        pygame.draw.rect(screen, color, input_rect)
-        text_surface = base_font.render(user_text, True, BLACK)
-        screen.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
-        input_rect.w = max(100, text_surface.get_width() + 10)
+        draw_text("Enter your goal:", base_font, BLACK, screen, (WIDTH // 2) - 150, HEIGHT * 2 // 5)
+        pygame.draw.rect(screen, CADETBLUE, input_rect)
+        screen.blit(base_font.render(user_text, True, BLACK), (input_rect.x + 5, input_rect.y + 5))
+
+        cursor_img = pygame.image.load("cursor.png")  # Load a custom cursor image
+        pygame.mouse.set_visible(False)  # Hide default cursor
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        screen.blit(cursor_img, (mouse_x, mouse_y))
 
         pygame.display.flip()
         clock.tick(60)

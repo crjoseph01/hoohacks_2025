@@ -27,9 +27,9 @@ def paintings_page(game_state, screen, events, coins, locked):
     menu_button = draw_button(WIDTH // 2 , HEIGHT * 14 // 16, screen, "return_menu.png") # Go back to main menu
     
     if locked:
-        drawings_button = draw_button(WIDTH // 2, HEIGHT * 10 // 160, screen, "locked_drawing.png")
-    elif (not locked):
-        drawings_button = draw_button(WIDTH // 2, HEIGHT * 10 // 160, screen, "unlocked.png")
+        drawings_button = draw_button(WIDTH // 2, HEIGHT * 20 // 160, screen, "locked_drawing.png")
+    elif (locked == False):
+        drawings_button = draw_button(WIDTH // 2, HEIGHT * 20 // 160, screen, "unlocked.png")
 
     if coins == 0:
         text = font.render("Complete Goals to Earn Coins!", True, BLUE)
