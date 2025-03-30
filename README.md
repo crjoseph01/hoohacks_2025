@@ -31,5 +31,5 @@
 
 * Achieve for smoother functioning of the drawing page
     * Implement a color picker option that allows the user to download any pixel color by number and complete it.
-* Improve UI design and user experience by adding interactive elements, background music, confettii, etc.
-* Adding persistance to save and load goals even after the applicaiton may be closed. However, the applicaiton should also reset daily.
+* Improve UI design and user experience by adding interactive elements, background music, confetti, etc.
+* Adding persistence to save and load goals even after the application may be closed. However, the application should also reset daily.
