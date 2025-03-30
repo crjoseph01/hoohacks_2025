@@ -9,9 +9,6 @@ pygame.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-GOLD = (255, 215, 0, 255)
 
 # Other constants
 WIDTH, HEIGHT = 800, 600
@@ -23,7 +20,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Daily Habit Tracker!")
 
 # Font
-font = pygame.font.Font(None, 36)
+font = pygame.font.Font(None, 56)
 
 def draw_button(x, y, image_path):
     button = pygame.image.load(image_path)
@@ -44,6 +41,12 @@ clock = pygame.time.Clock()
 
 # -------- Main Program Loop -----------
 while not done:
+    # Here, we clear the screen to white. Don't put other drawing commands
+    # above this, or they will be erased with this command.
+    # If you want a background image, replace this clear with blit'ing the
+    # background image.
+    screen.fill(WHITE)
+
     # --- Main event loop
     events = pygame.event.get()
     for event in events:
@@ -53,16 +56,14 @@ while not done:
             if game_state == "main_menu" and goals_button.collidepoint(event.pos):
                 game_state = "my_goals"  # Switch to goals screen
             elif game_state == "main_menu" and paintings_button.collidepoint(event.pos):
-                game_state = "my_paintings"  # Switch to paintings screen
-            elif game_state == "my_goals":
-                token = goal.health_goals_scene(screen, health_goals, token, events)
-                if goal.draw_button(screen, GREEN, 20, HEIGHT - 70, 100, 50, "Menu").collidepoint(event.pos):
-                    game_state = "main_menu"
-
+                game_state = "my_paintings" # Switch to paintings screen
+            # elif game_state == "my_goals" and menu_button.collidepoint(event.pos):
+            #     game_state = "main_menu"  # Switch to main menu screen
+    
     # **Render Screens Based on game_state**
     if game_state == "main_menu":
         screen.fill(WHITE)
-        title_text = font.render("Main Menu", True, BLUE)
+        title_text = font.render("Daily Habit Tracker!", True, BLUE)
         title_textw, title_texth = title_text.get_size()
         screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 4))
 
@@ -76,9 +77,15 @@ while not done:
     elif game_state == "my_paintings":
         game_state = paintings.paintings_page(game_state)
 
+    # --- Game logic should go here
+ 
+    # --- Screen-clearing code goes here
+ 
+    # --- Drawing code should go here
+
     # Get mouse position and draw custom cursor
     cursor_img = pygame.image.load("cursor.png")  # Load a custom cursor image
-    pygame.mouse.set_visible(False)  # Hide default cursor
+    # pygame.mouse.set_visible(False)  # Hide default cursor
     mouse_x, mouse_y = pygame.mouse.get_pos()
     screen.blit(cursor_img, (mouse_x, mouse_y))
 
