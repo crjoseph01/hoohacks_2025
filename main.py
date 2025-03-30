@@ -75,7 +75,7 @@ while not done:
         background = pygame.image.load("hoohacks_background.png")
         screen.blit(background, (0,0))
 
-        main_title = pygame.image.load("title_main.png")
+        main_title = pygame.image.load("main_title.png")
         main_titlex, main_titley = main_title.get_size()
         screen.blit(main_title, ((WIDTH // 2) - (main_titlex // 2), (HEIGHT * 3 // 10)))
 
