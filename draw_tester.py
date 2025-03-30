@@ -1,7 +1,7 @@
 # color_puzzle_tester.py
 import pygame
 import sys
-from draw import color_puzzle_scene
+from draw_update import color_puzzle_scene
 
 pygame.init()
 print("Pygame initialized")
