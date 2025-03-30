@@ -29,8 +29,17 @@ palette = {
     7: BLACK,
     8: WHITE,
 }
+def draw_button(x, y, screen, image_path):
+    image = pygame.image.load(image_path) 
+    imagex, imagey = image.get_size()
+    button_rect = image.get_rect()
+    button_rect.topleft = (x - (imagex // 2), y)
+
+    screen.blit(image, button_rect)
+    return button_rect
 
 def color_puzzle_scene(screen):
+    pygame.mouse.set_visible(True)
     # Image Loading - Using relative path
     image_path = "puzzle_frog.png"
 
@@ -73,6 +82,8 @@ def color_puzzle_scene(screen):
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
+                if menu_button.collidepoint(event.pos):
+                    return "main_menu"
                 if event.button == 1:
                     mouse_pos = pygame.mouse.get_pos()
 
@@ -99,6 +110,7 @@ def color_puzzle_scene(screen):
         screen.blit(puzzle_image, (0, 0))
 
         for color_rect, color_num in color_boxes:
+            menu_button = draw_button(WIDTH * 3 // 4, HEIGHT * 14 // 16, screen, "return_menu.png")
             pygame.draw.rect(screen, palette[color_num], color_rect)
             pygame.draw.rect(screen, BLACK, color_rect, 2)
             font = pygame.font.Font(None, 36)

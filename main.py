@@ -19,7 +19,7 @@ WIDTH, HEIGHT = 800, 600
 health_goals = {"fitness": [], "eating": [], "mental health": []}
 token = False
 coins = 1
-locked = True
+locked = False
 
 # Set the width and height of the screen [width, height]
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -78,7 +78,7 @@ while not done:
     elif game_state == "my_paintings":
         game_state = paintings.paintings_page(game_state, screen, events, coins, locked)
     elif game_state == "draw_page":
-        draw.color_puzzle_scene(screen, events)
+        game_state = draw.color_puzzle_scene(screen)
 
     # Get mouse position and draw custom cursor
     cursor_img = pygame.image.load("cursor.png")  # Load a custom cursor image
