@@ -2,6 +2,7 @@ import sys
 import pygame
 import paintings
 import goal
+import draw
 
 pygame.init()
 
@@ -17,6 +18,8 @@ GOLD = (255, 215, 0, 255)
 WIDTH, HEIGHT = 800, 600
 health_goals = {"fitness": [], "eating": [], "mental health": []}
 token = False
+coins = 1
+locked = True
 
 # Set the width and height of the screen [width, height]
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -54,7 +57,7 @@ while not done:
             if game_state == "main_menu" and goals_button.collidepoint(event.pos):
                 game_state = "my_goals"  # Switch to goals screen
             elif game_state == "main_menu" and paintings_button.collidepoint(event.pos):
-                game_state = "my_paintings"  # Switch to paintings screen
+                game_state = "my_paintings"
             elif game_state == "my_goals":
                 token = goal.health_goals_scene(screen, health_goals, token, events)
                 if goal.draw_button(screen, GREEN, 20, HEIGHT - 70, 100, 50, "Menu").collidepoint(event.pos):
@@ -69,13 +72,13 @@ while not done:
 
         goals_button = draw_button(WIDTH // 2, HEIGHT // 2, "see_goals.png")
         paintings_button = draw_button((WIDTH // 2), (HEIGHT // 2) + 100, "see_paintings.png")
-
     elif game_state == "my_goals":
         token = goal.health_goals_scene(screen, health_goals, token, events)
         goal.draw_button(screen, GREEN, 20, HEIGHT - 70, 100, 50, "Menu")
-
     elif game_state == "my_paintings":
-        game_state = paintings.paintings_page(game_state, screen)
+        game_state = paintings.paintings_page(game_state, screen, events, coins, locked)
+    elif game_state == "draw_page":
+        draw.color_puzzle_scene(screen, events)
 
     # Get mouse position and draw custom cursor
     cursor_img = pygame.image.load("cursor.png")  # Load a custom cursor image

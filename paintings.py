@@ -10,32 +10,42 @@ WIDTH, HEIGHT = 800, 600
 font = pygame.font.Font(None, 36)
 
 def draw_button(x, y, screen, image_path):
-    return_menu = pygame.image.load(image_path) 
-    return_menux, return_menuy = return_menu.get_size()
-    button_rect = return_menu.get_rect()
-    button_rect.topleft = (x - (return_menux // 2), y)
+    image = pygame.image.load(image_path) 
+    imagex, imagey = image.get_size()
+    button_rect = image.get_rect()
+    button_rect.topleft = (x - (imagex // 2), y)
 
-    screen.blit(return_menu, button_rect)
+    screen.blit(image, button_rect)
     return button_rect
 
-def paintings_page(game_state, screen):
+def paintings_page(game_state, screen, events, coins, locked):
     screen.fill(WHITE)
     title_text = font.render("My Paintings:", True, BLUE)
     title_textw, title_texth = title_text.get_size()
     screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 16))
     
     menu_button = draw_button(WIDTH // 2 , HEIGHT * 14 // 16, screen, "return_menu.png") # Go back to main menu
-    #drawing_button = draw_button(WIDTH // 2, HEIGHT // 2, screen, "")
+    
+    if locked:
+        drawings_button = draw_button(WIDTH // 2, HEIGHT * 10 // 160, screen, "locked_drawing.png")
+    elif (not locked):
+        drawings_button = draw_button(WIDTH // 2, HEIGHT * 10 // 160, screen, "unlocked.png")
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+    if coins == 0:
+        text = font.render("Complete Goals to Earn Coins!", True, BLUE)
+        textw, texth = text.get_size()
+        screen.blit(text, ((WIDTH // 2) - (textw // 2), HEIGHT * 10 // 16))
+    elif coins != 0:
+        text = font.render("Click on Painting to Begin!", True, BLUE)
+        textw, texth = text.get_size()
+        screen.blit(text, ((WIDTH // 2) - (textw // 2), HEIGHT * 10 // 16))
+
+    for event in events:  # Use the events passed from main
+        if event.type == pygame.MOUSEBUTTONDOWN:
             if menu_button.collidepoint(event.pos):
-                game_state = "main_menu"
-                return game_state
-            # elif drawing_button.collidepoint(event.pos):
-            #     game_state = "draw"
-            #     return game_state
+                return "main_menu"
+            elif coins > 0 and drawings_button.collidepoint(event.pos):
+                locked = False
+                return "draw_page"
     
     return game_state
