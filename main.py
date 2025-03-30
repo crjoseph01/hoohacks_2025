@@ -19,7 +19,7 @@ locked = True
 
 # Set the width and height of the screen [width, height]
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Daily Habit Tracker!")
+pygame.display.set_caption("Paint by Goals!")
 
 # Font
 font = pygame.font.Font(None, 56)

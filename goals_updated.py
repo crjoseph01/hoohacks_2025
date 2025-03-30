@@ -65,7 +65,8 @@ def get_user_input(screen, input_rect):
                 else:
                     user_text += event.unicode
 
-        screen.fill(WHITE)  # Clear the screen before drawing
+        enter_background = pygame.image.load("enter_background.png")  # Clear the screen before drawing
+        screen.blit(enter_background, (0,0))
         draw_text("Enter your goal:", base_font, BLACK, screen, (WIDTH // 2) - 150, HEIGHT * 2 // 5)
         pygame.draw.rect(screen, CADETBLUE, input_rect)
         screen.blit(base_font.render(user_text, True, BLACK), (input_rect.x + 5, input_rect.y + 5))
