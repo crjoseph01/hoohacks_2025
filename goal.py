@@ -3,7 +3,6 @@ import sys
 
 # Initialize Pygame font module
 pygame.font.init()
-pygame.init()
 
 # Colors
 WHITE = (255, 255, 255)
@@ -71,7 +70,7 @@ def get_user_input(screen, input_rect):
         pygame.display.flip()
         clock.tick(60)
 
-def health_goals_scene(screen, health_goals, token):
+def health_goals_scene(screen, health_goals, token, event_list):
     screen.fill(WHITE)
     draw_text("Health Goals", small_font, BLACK, screen, screen.get_width() // 2 - 80, 20)
 
@@ -79,8 +78,6 @@ def health_goals_scene(screen, health_goals, token):
     column_width = screen.get_width() // 3
     y_offset = 60
     needs_refresh = False
-
-    event_list = pygame.event.get()
 
     category_rects = []
 
@@ -99,8 +96,11 @@ def health_goals_scene(screen, health_goals, token):
             draw_text(goal["text"], small_font, BLACK, screen, goal_text_x, y_offset_cat)
             y_offset_cat += 30
 
-            for event in event_list:
-                if event.type == pygame.MOUSEBUTTONDOWN:
+        for event in event_list:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for j, goal in enumerate(health_goals[category]):
+                    checkbox_x = x_offset + 20
+                    checkbox = pygame.Rect(checkbox_x, y_offset + 30 * j, 20, 20)
                     if checkbox.collidepoint(event.pos):
                         goal["completed"] = not goal["completed"]
                         if goal["completed"]:
@@ -142,7 +142,4 @@ def health_goals_scene(screen, health_goals, token):
                     print("Go to color puzzle page")
     else:
         token = False
-    if needs_refresh:
-        return token
-    else:
-        return token
+    return token
