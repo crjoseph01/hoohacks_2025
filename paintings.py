@@ -25,7 +25,7 @@ def paintings_page(game_state, screen):
     screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 16))
     
     menu_button = draw_button(WIDTH // 2 , HEIGHT * 14 // 16, screen, "return_menu.png") # Go back to main menu
-    drawing_button = draw_button(WIDTH // 2, HEIGHT // 2, screen, "")
+    #drawing_button = draw_button(WIDTH // 2, HEIGHT // 2, screen, "")
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -34,8 +34,8 @@ def paintings_page(game_state, screen):
             if menu_button.collidepoint(event.pos):
                 game_state = "main_menu"
                 return game_state
-            elif drawing_button.collidepoint(event.pos):
-                game_state = "draw"
-                return game_state
+            # elif drawing_button.collidepoint(event.pos):
+            #     game_state = "draw"
+            #     return game_state
     
     return game_state
