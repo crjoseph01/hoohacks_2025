@@ -19,12 +19,14 @@ def draw_button(x, y, screen, image_path):
     return button_rect
 
 def paintings_page(game_state, screen, events, coins, locked):
-    screen.fill(WHITE)
+    background = pygame.image.load("paintings_background.png")
+    screen.blit(background, (0,0))
+
     title_text = font.render("My Paintings:", True, BLUE)
     title_textw, title_texth = title_text.get_size()
-    screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 16))
+    screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT * 2 // 17))
     
-    menu_button = draw_button(WIDTH // 2 , HEIGHT * 14 // 16, screen, "return_menu.png") # Go back to main menu
+    menu_button = draw_button(WIDTH // 2 , HEIGHT * 13 // 16, screen, "return_menu.png") # Go back to main menu
     
     if locked:
         drawings_button = draw_button(WIDTH // 2, HEIGHT * 20 // 160, screen, "locked_drawing.png")
