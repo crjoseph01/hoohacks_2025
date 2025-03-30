@@ -1,8 +1,8 @@
 import sys
 import pygame
-import paintings
-import goals_updated
-import draw
+import paintings # see paintings.py
+import goals_updated # see gaols_updated.py
+import draw # see draw.py
 
 pygame.init()
 
