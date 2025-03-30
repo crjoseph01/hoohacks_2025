@@ -1,4 +1,4 @@
-# Hoohacks 2025 - Daily Task Manager (Pygame Project)
+# Hoohacks 2025 - Paint by Goals (Pygame Project)
 
 ## Authors
 1) Grace Zhang, aad8rp@virginia.edu, [gracezh5]
