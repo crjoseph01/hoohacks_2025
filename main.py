@@ -64,10 +64,12 @@ while not done:
 
     # **Render Screens Based on game_state**
     if game_state == "main_menu":
-        screen.fill(WHITE)
-        title_text = font.render("Daily Habits Tracker!", True, BLUE)
-        title_textw, title_texth = title_text.get_size()
-        screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 4))
+        background = pygame.image.load("hoohacks_background.png")
+        screen.blit(background, (0,0))
+
+        main_title = pygame.image.load("title_main.png")
+        main_titlex, main_titley = main_title.get_size()
+        screen.blit(main_title, ((WIDTH // 2) - (main_titlex // 2), (HEIGHT * 3 // 10)))
 
         goals_button = draw_button(WIDTH // 2, HEIGHT // 2, "see_goals.png")
         paintings_button = draw_button((WIDTH // 2), (HEIGHT // 2) + 100, "see_paintings.png")
