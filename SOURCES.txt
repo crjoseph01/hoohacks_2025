@@ -1,2 +1,16 @@
+Resources Used:
 
-Reading user input: https://www.geeksforgeeks.org/how-to-create-a-text-input-box-with-pygame/
+This page has all sources used to implement this daily task tracker project.
+
+1. Reading user input: https://www.geeksforgeeks.org/how-to-create-a-text-input-box-with-pygame/
+
+2. Free color by pixel image (frog_puzzle.png): https://www.brightsprouts.com/color-by-number/
+
+3. Gemini 2.0 Flash for help using Pygame and debugging: https://gemini.google.com/app
+
+-----------------------------------------------------------------------------------------------------------------
+
+Code Libraries:
+1. pygame
+    * Source: https://www.pygame.org/
+    * License: LGPL 2.1
