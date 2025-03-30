@@ -8,7 +8,7 @@
 * `main.py`: The main script that runs the main application and manages changes between scenes.
 * `goal.py`: Contains functions for loading and interacting with the goals page, including adding and checking off daily goals which gives you a token.
 * `paintings.py`: Contains the script for allowing the user to unlock a painting after reciving a token.
-* `draw.py`: The drawing scene allows user to interact with digital image and the palatte to color "pixel by pixel."
+* `draw.py`: The drawing scene allows user to interact with digital image and the palette to color "pixel by pixel."
 * `see_goals.png`, `see_paintings.png`, `hoohacks_background.png`, `locked_drawing.png`, `puzzle_frog.png`, `return_menu.png`, `title_main.png`, `unlocked.png`, `cursor.png`: Images used for buttons and the custom cursor.
 
 ## Dependencies
