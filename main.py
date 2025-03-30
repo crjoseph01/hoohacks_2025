@@ -1,10 +1,22 @@
+"""
+ Pygame base template for opening a window
+ 
+ Sample Python/Pygame Programs
+ Simpson College Computer Science
+ http://programarcadegames.com/
+ http://simpson.edu/computer-science/
+ 
+ Explanation video: http://youtu.be/vRB_983kUMc
+"""
+# Template from: http://programarcadegames.com/python_examples/f.php?file=pygame_base_template.py
+ 
 import sys
 import pygame
 import paintings
 import goal
 
 pygame.init()
-
+ 
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -14,7 +26,7 @@ BLUE = (0, 0, 255, 255)
 WIDTH, HEIGHT = 800, 600
 health_goals = {"fitness": [], "eating": [], "mental health": []}
 token = False
-
+ 
 # Set the width and height of the screen [width, height]
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Daily Habit Tracker!")
@@ -23,10 +35,11 @@ pygame.display.set_caption("Daily Habit Tracker!")
 font = pygame.font.Font(None, 56)
 
 def draw_button(x, y, image_path):
-    button = pygame.image.load(image_path)
+    button = pygame.image.load(image_path) 
     buttonx, buttony = button.get_size()
     button_rect = button.get_rect()
     button_rect.topleft = (x - (buttonx // 2), y)
+
     screen.blit(button, button_rect)
     return button_rect
 
@@ -35,21 +48,16 @@ game_state = "main_menu"  # Start on the main menu
 
 # Loop until the user clicks the close button.
 done = False
-
+ 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
-
+ 
 # -------- Main Program Loop -----------
 while not done:
-    # Here, we clear the screen to white. Don't put other drawing commands
-    # above this, or they will be erased with this command.
-    # If you want a background image, replace this clear with blit'ing the
-    # background image.
     screen.fill(WHITE)
 
     # --- Main event loop
-    events = pygame.event.get()
-    for event in events:
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -57,8 +65,6 @@ while not done:
                 game_state = "my_goals"  # Switch to goals screen
             elif game_state == "main_menu" and paintings_button.collidepoint(event.pos):
                 game_state = "my_paintings" # Switch to paintings screen
-            # elif game_state == "my_goals" and menu_button.collidepoint(event.pos):
-            #     game_state = "main_menu"  # Switch to main menu screen
     
     # **Render Screens Based on game_state**
     if game_state == "main_menu":
@@ -66,22 +72,15 @@ while not done:
         title_text = font.render("Daily Habit Tracker!", True, BLUE)
         title_textw, title_texth = title_text.get_size()
         screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 4))
-
+        
         goals_button = draw_button(WIDTH // 2, HEIGHT // 2, "see_goals.png")
-        paintings_button = draw_button((WIDTH // 2), (HEIGHT // 2) + 100, "see_paintings.png")
-
+        paintings_button = draw_button ((WIDTH // 2), (HEIGHT // 2) + 100, "see_paintings.png")
     elif game_state == "my_goals":
-        token = goal.health_goals_scene(screen, health_goals, token, events)
-        goal.draw_button(screen, GREEN, 20, HEIGHT - 70, 100, 50, "Menu")
-
+        goal.health_goals_scene(screen, health_goals, token)
+        
+        # menu_button = draw_button(WIDTH // 2, HEIGHT // 2, "Back to Main Menu")
     elif game_state == "my_paintings":
-        game_state = paintings.paintings_page(game_state)
-
-    # --- Game logic should go here
- 
-    # --- Screen-clearing code goes here
- 
-    # --- Drawing code should go here
+        game_state = paintings.paintings_page(game_state, screen)
 
     # Get mouse position and draw custom cursor
     cursor_img = pygame.image.load("cursor.png")  # Load a custom cursor image
@@ -91,8 +90,9 @@ while not done:
 
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
-
+ 
     # --- Limit to 60 frames per second
     clock.tick(60)
-
+ 
+# Close the window and quit.
 pygame.quit()
