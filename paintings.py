@@ -43,9 +43,9 @@ def paintings_page(game_state, screen, events, coins, locked):
     for event in events:  # Use the events passed from main
         if event.type == pygame.MOUSEBUTTONDOWN:
             if menu_button.collidepoint(event.pos):
-                return "main_menu"
+                return "main_menu", locked
             elif coins > 0 and drawings_button.collidepoint(event.pos):
                 locked = False
-                return "draw_page"
+                return "draw_page", locked
     
-    return game_state
+    return game_state, locked

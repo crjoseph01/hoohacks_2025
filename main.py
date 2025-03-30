@@ -26,7 +26,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Daily Habit Tracker!")
 
 # Font
-font = pygame.font.Font(None, 36)
+font = pygame.font.Font(None, 56)
 
 def draw_button(x, y, image_path):
     button = pygame.image.load(image_path)
@@ -59,24 +59,23 @@ while not done:
             elif game_state == "main_menu" and paintings_button.collidepoint(event.pos):
                 game_state = "my_paintings"
             elif game_state == "my_goals":
-                token = goal.health_goals_scene(screen, health_goals, token, events)
-                if goal.draw_button(screen, GREEN, 20, HEIGHT - 70, 100, 50, "Menu").collidepoint(event.pos):
+                if goal.draw_image(WIDTH // 2, HEIGHT * 14 // 16, screen, "return_menu.png").collidepoint(event.pos):
                     game_state = "main_menu"
 
     # **Render Screens Based on game_state**
     if game_state == "main_menu":
         screen.fill(WHITE)
-        title_text = font.render("Main Menu", True, BLUE)
+        title_text = font.render("Daily Habits Tracker!", True, BLUE)
         title_textw, title_texth = title_text.get_size()
         screen.blit(title_text, ((WIDTH // 2) - (title_textw // 2), HEIGHT // 4))
 
         goals_button = draw_button(WIDTH // 2, HEIGHT // 2, "see_goals.png")
         paintings_button = draw_button((WIDTH // 2), (HEIGHT // 2) + 100, "see_paintings.png")
     elif game_state == "my_goals":
-        token = goal.health_goals_scene(screen, health_goals, token, events)
-        goal.draw_button(screen, GREEN, 20, HEIGHT - 70, 100, 50, "Menu")
+        token, coins = goal.health_goals_scene(screen, health_goals, token, events, coins)
+        goal.draw_image(WIDTH // 2, HEIGHT * 14 // 16, screen, "return_menu.png")
     elif game_state == "my_paintings":
-        game_state = paintings.paintings_page(game_state, screen, events, coins, locked)
+        game_state, locked = paintings.paintings_page(game_state, screen, events, coins, locked)
     elif game_state == "draw_page":
         game_state = draw.color_puzzle_scene(screen)
 

@@ -32,6 +32,15 @@ def draw_button(surface, color, x, y, width, height, text):
     draw_text(text, small_font, BLACK, surface, x + 10, y + 5)
     return rect
 
+def draw_image(x, y, screen, image_path):
+    image = pygame.image.load(image_path) 
+    imagex, imagey = image.get_size()
+    button_rect = image.get_rect()
+    button_rect.topleft = (x - (imagex // 2), y)
+
+    screen.blit(image, button_rect)
+    return button_rect
+
 # Function to draw checkboxes
 def draw_checkbox(surface, x, y, checked):
     rect = pygame.Rect(x, y, 20, 20)
@@ -70,7 +79,7 @@ def get_user_input(screen, input_rect):
         pygame.display.flip()
         clock.tick(60)
 
-def health_goals_scene(screen, health_goals, token, event_list):
+def health_goals_scene(screen, health_goals, token, event_list, coins):
     screen.fill(WHITE)
     draw_text("Health Goals", small_font, BLACK, screen, screen.get_width() // 2 - 80, 20)
 
@@ -134,6 +143,7 @@ def health_goals_scene(screen, health_goals, token, event_list):
 
     if all_completed and len([item for sublist in health_goals.values() for item in sublist]) > 0:
         token = True
+        coins += 1
         draw_text("All goals completed! You earned a token!", small_font, GREEN, screen, screen.get_width() // 2 - 150, screen.get_height() - 50)
         puzzle_button = draw_button(screen, GREEN, screen.get_width() - 150, screen.get_height() - 60, 140, 50, "Color Puzzle")
         for event in event_list:
@@ -142,4 +152,4 @@ def health_goals_scene(screen, health_goals, token, event_list):
                     print("Go to color puzzle page")
     else:
         token = False
-    return token
+    return token, coins
