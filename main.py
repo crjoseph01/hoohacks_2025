@@ -45,12 +45,6 @@ clock = pygame.time.Clock()
 
 # -------- Main Program Loop -----------
 while not done:
-
-
-
-
-
-
     # --- Main event loop
     events = pygame.event.get()
     for event in events:
@@ -81,13 +75,7 @@ while not done:
         goal.draw_button(screen, GREEN, 20, HEIGHT - 70, 100, 50, "Menu")
 
     elif game_state == "my_paintings":
-        game_state = paintings.paintings_page(game_state)
-
-
-
-
-
-
+        game_state = paintings.paintings_page(game_state, screen)
 
     # Get mouse position and draw custom cursor
     cursor_img = pygame.image.load("cursor.png")  # Load a custom cursor image
